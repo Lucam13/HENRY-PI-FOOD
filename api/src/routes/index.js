@@ -42,7 +42,7 @@ router.get('/diets', async (req, res, next) => {
 })
 
 router.post('/recipes', async (req,res)=> { 
-    const { name, summary, image, steps, healthScore, createdInDb, diets } = req.body
+    const { name, summary, image, steps, healthScore, diets } = req.body
     
     const recipeCreated = await Recipe.create({
             name,
@@ -50,10 +50,10 @@ router.post('/recipes', async (req,res)=> {
             image,
             healthScore,
             steps,
-            createdInDb,
         })
         
         recipeCreated.addDiet(diets)
+        
         res.status(200).send(recipeCreated)
     
 })
@@ -63,11 +63,10 @@ router.get("/recipes/:id", async (req, res)=>{
     const id = req.params.id                         
     const recipes = await getAllRecipe()
     if(id) {
-        let recipeId = await recipes.filter(ele => ele.id == id)
+        let recipeId = recipes.filter(ele => ele.id == id)
         recipeId.length?
-        res.status(200).json(recipeId) : 
+        res.status(200).json(recipeId[0]) : 
         res.status(400).json("Recipe Id not found")
-
     }
 })
 

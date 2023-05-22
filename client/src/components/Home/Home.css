@@ -1,6 +1,51 @@
-.title {
+.title2 {
     text-align: center;
-    color: rgb(34, 92, 216);
+    font-size: 70px;
+ 
+  }
+
+
+
+  .navbar{
+    display: flex;
+    justify-content: center;
+  }
+
+
+  .filters{
+    text-align: center;
+    margin-left: 12%
+
+  }
+
+  .buttoncreate{
     
-    
+    font-family:Georgia, 'Times New Roman', Times, serif;
+    font-style: italic;
+    font-size: 12px;
+    color: rgb(0, 0, 0);
+    width: 100px;
+    height: 70px;
+    background-color: #4cb68d;
+    border-radius: 7px;
+    cursor: pointer;
+    transition: .3s ease all;
+    box-shadow: 0 5px 15px rgba(0,0,0,1);
+  }
+  .containerbuttons{
+     
+  }
+
+  .buttonreload {
+    font-family:Georgia, 'Times New Roman', Times, serif;
+    font-style: italic;
+    font-size: 12px;
+    color: rgb(0, 0, 0);
+    width: 100px;
+    height: 70px;
+    background-color: #4cb68d;
+    border-radius: 7px;
+    cursor: pointer;
+    transition: .3s ease all;
+    box-shadow: 0 5px 15px rgba(0,0,0,1);
   }

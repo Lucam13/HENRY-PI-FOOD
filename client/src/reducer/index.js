@@ -1,13 +1,15 @@
 
 const initialState = {
     recipes : [], 
-    allRecipes : []
+    allRecipes : [],
+    diets: [],
+    detail: {}
 }
 
 function rootReducer(state = initialState, action ){
     switch(action.type) { 
         case 'GET_RECIPES':
-            console.log("RECIPE - ", action.payload[0])
+           
             return {
                 ...state,
                 recipes: action.payload,
@@ -28,29 +30,75 @@ function rootReducer(state = initialState, action ){
                 }
 
             case 'ORDER_BY_NAME':
-                let sortedArr = action.payload === 'asc' ?
-                state.allRecipes.sort(function(a, b) {
-                    if (a.name > b.name) {
+                let sortedArr = [...state.recipes];   
+                sortedArr = action.payload === 'asc' ?
+                sortedArr.sort(function(a, b) {
+                    if (a.name.toLowerCase() > b.name.toLowerCase()) {
                         return 1;
-                    }
-                    if (b.name > a.name) {
+                    } 
+                    if (b.name.toLowerCase() > a.name.toLowerCase()) {
                         return -1;
                     }
                     return 0; 
                 }) : 
-                state.allRecipes.sort(function (a, b) {
-                    if (a.name > b.name) {
+                sortedArr.sort(function (a, b) {
+                    if (a.name.toLowerCase() > b.name.toLowerCase()) {
                         return -1;
                     }
-                    if(b.name > a.name) {
+                    if(b.name.toLowerCase() > a.name.toLowerCase()) {
                         return 1;
                     }
                     return 0;
                 })
                 return {
                     ...state,
-                    allRecipes: sortedArr
-                }    
+                    recipes: sortedArr
+                }
+                
+                case 'ORDER_BY_SCORE':
+                    let scoring = [...state.recipes]
+                     scoring = action.payload === 'min' ?
+                     scoring.sort(function (a, b){
+                        if (a.healthScore > b.healthScore){
+                            return 1;
+                        }
+                        if (b.healthScore > a.healthScore){
+                            return -1;
+                        }
+                        return 0
+                    }):
+                    scoring.sort(function (a,b){
+                        if(a.healthScore > b.healthScore){
+                            return -1
+                        }
+                        if (b.healthScore > a.healthScore){
+                            return 1
+                        }
+                        return 0
+                    })
+                    return {
+                        ...state,
+                        recipes:scoring
+                    }
+                    case 'GET_NAME_RECIPES':
+                        return {
+                            ...state,
+                            recipes: action.payload
+                        }
+                    case 'POST_RECIPE':
+                        return{
+                            ...state,
+                        }    
+                    case 'GET_DIETS':
+                        return {
+                            ...state,
+                            diets:action.payload
+                        }
+                    case 'GET_DETAILS':
+                        return{
+                            ...state,
+                            detail: action.payload
+                        }        
                 default:
                    return state;
     }

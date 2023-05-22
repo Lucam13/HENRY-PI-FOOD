@@ -1,18 +1,19 @@
 import React from "react";
 import {useState, useEffect} from 'react'
 import {useDispatch, useSelector} from 'react-redux'
-import { getRecipes, filterRecipesByDiets, filterCreated, orderByName } from "../../actions";
+import { getRecipes, filterRecipesByDiets, filterCreated, orderByName, orderByScore } from "../../actions";
 import { Link } from "react-router-dom"
 import Card from "../Card/Card";
 import Paginado from "../Paginado/Paginado";
+import SearchBar from "../SearchBar/SearchBar";
 import './Home.css'
 
 export default function Home(){
     const dispatch = useDispatch();
     const allRecipes = useSelector((state)=> state.recipes)
-    const [orden, setOrden] = useState('')
+    
     const [currentPage, setCurrentPage] = useState(1)
-    const [recipesPerPage, setRecipesPerPage] = useState(9)
+    const recipesPerPage = 9
     const indexOfLastRecipe = currentPage * recipesPerPage
     const indexOfFirstRecipe = indexOfLastRecipe - recipesPerPage
     const currentRecipes = allRecipes.slice(indexOfFirstRecipe, indexOfLastRecipe)
@@ -35,7 +36,14 @@ export default function Home(){
       event.preventDefault();
       dispatch(orderByName(event.target.value))
       setCurrentPage(1)
-      setOrden(`Ordenado $(event.target.value)`)
+     
+    }
+
+    function handleSortScore(event){
+      event.preventDefault()
+      dispatch(orderByScore(event.target.value))
+      setCurrentPage(1)
+     
     }
 
     function handleFilterDiets(event){
@@ -47,27 +55,37 @@ export default function Home(){
     }
 
     return(
-     <div> 
-           <Link to= '/recipes'>Crear Receta</Link>  
-            <h1 className="title">Henry Food</h1> 
-           <button onClick={event =>{handleClick(event)}}>
-              Volver a cargar las recetas           
-           </button>
-          <div>
-           <label>Sort by HealthScore</label>
-             <select>
+     <div>          
+            <h1 className="title2">The Menu</h1>   
+           <div className="containerbuttons">
+              <Link to= '/recipes'>
+                <button className="buttoncreate">Create Recipe</button>
+              </Link> 
+              <button className="buttonreload" onClick={event =>{handleClick(event)}}>
+                    Volver a cargar las recetas           
+              </button>
+              <div className="searchbar">
+              <SearchBar/>  
+            </div>
+          </div> 
+          <div className="filters">
+            <label>Sort by HealthScore</label>
+             <select onClick={event => {handleSortScore(event)}}>
+                <option value=""></option>
                 <option value='min'>0-100</option>
                 <option value='max'>100-0</option>
-            </select>
+              </select>
             <label>Sort alphabetically</label>
              <select onChange={event => handleSort(event)}>
+                <option value=""></option>
                 <option value='asc'>A-Z</option>
                 <option value='desc'>Z-A</option>
-            </select>
+             </select>
           </div>
-          <div>
+          <div className="filters">
              <label>Filter By Diets</label>
              <select onChange={event => handleFilterDiets(event)}>
+                <option value=""></option>
                 <option value="All">Todas</option>
                 <option value="gluten free">gluten free</option>
                 <option value="dairy free">dairy free</option>
@@ -79,25 +97,28 @@ export default function Home(){
                 <option value="whole 30">whole30</option>
               </select>
               <select onChange={event => handleFilterCreated(event)}>
+                <option value=""></option>
                 <option value="All">Todos</option>
                 <option value="created">Created</option>
                 <option value="from api">From Api</option>
               </select>
+           </div>  
+           {
+            currentRecipes?.map(el=>{
+                return (
+                <Link to={"/recipes/" + el.id} key={el.id}>
+                  <Card name={el.name} image={el.image} diets={el.diets} healthScore={el.healthScore} />
+                </Link>
+                )
+            })
+            }
+              <div className="navbar">
               <Paginado 
                 recipesPerPage = {recipesPerPage}
                 allRecipes = {allRecipes.length}
                 paginado = {paginado}
               />
-           </div>  
-           {
-            currentRecipes?.map(el=>{
-                return (
-                <Link to={"/home/" + el.id}>
-                <Card name={el.name} image={el.image} diets={el.diets}/>
-                </Link>
-                )
-            })
-            }
+              </div>
         </div>
 
     )
