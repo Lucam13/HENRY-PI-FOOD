@@ -15,9 +15,7 @@ function App() {
       <Route path='/recipes' Component={RecipeCreate}/>
       <Route path='/recipes/:recipeID' Component={Detail} />
     </Routes>
-    <div className="App">
-  
-    </div>
+    
     </BrowserRouter>
   );
 }

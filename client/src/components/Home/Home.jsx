@@ -55,19 +55,23 @@ export default function Home(){
     }
 
     return(
-     <div>          
+      <body id="background2">
+     <div>   
             <h1 className="title2">The Menu</h1>   
-           <div className="containerbuttons">
+                 
+          <div className="navbar2">
+             <div className="searchbar">
+              <SearchBar/>  
+             </div>
+          <div>
               <Link to= '/recipes'>
                 <button className="buttoncreate">Create Recipe</button>
               </Link> 
               <button className="buttonreload" onClick={event =>{handleClick(event)}}>
-                    Volver a cargar las recetas           
+                    Reload Recipes          
               </button>
-              <div className="searchbar">
-              <SearchBar/>  
-            </div>
           </div> 
+             
           <div className="filters">
             <label>Sort by HealthScore</label>
              <select onClick={event => {handleSortScore(event)}}>
@@ -81,8 +85,7 @@ export default function Home(){
                 <option value='asc'>A-Z</option>
                 <option value='desc'>Z-A</option>
              </select>
-          </div>
-          <div className="filters">
+          
              <label>Filter By Diets</label>
              <select onChange={event => handleFilterDiets(event)}>
                 <option value=""></option>
@@ -96,13 +99,18 @@ export default function Home(){
                 <option value="fodmap friendly">fodmap friendly</option>
                 <option value="whole 30">whole30</option>
               </select>
+
+              <label>Filter By Origin</label>
               <select onChange={event => handleFilterCreated(event)}>
                 <option value=""></option>
                 <option value="All">Todos</option>
                 <option value="created">Created</option>
                 <option value="from api">From Api</option>
-              </select>
-           </div>  
+               </select> 
+             </div>
+          </div>
+           
+          
            {
             currentRecipes?.map(el=>{
                 return (
@@ -118,9 +126,9 @@ export default function Home(){
                 allRecipes = {allRecipes.length}
                 paginado = {paginado}
               />
-              </div>
+            </div>
         </div>
-
+        </body>      
     )
 
 }

@@ -1,7 +1,4 @@
-@font-face{
-  font-family: 'Callista.ttf';
-  src:url(/client/Fonts/Callista.ttf) format('ttf');
-}
+@import url('https://fonts.googleapis.com/css2?family=Great+Vibes&display=swap');
 
 .promo {
     display: flex;
@@ -11,28 +8,20 @@
     width:60%;
     margin:auto;
     margin-top: 20%;
-    
     position:relative;
     z-index: 2;
-       
+    font-family: 'Great Vibes', cursive;  
   }
 
-.title {
-    color:#fffefe ;
-    margin-top: 10px;
-    font-size: 50px;
-    font-style: italic;
-    font-family:Georgia, 'Times New Roman', Times, serif;
-    
-}
+
 .button {
-    font-family:Georgia, 'Times New Roman', Times, serif;
-    font-style: italic;
-    font-size: 17px;
+  font-family: 'Great Vibes' ;
+   
+    font-size: 40px;
     color: rgb(255, 255, 255);
-    width: 100px;
-    height: 40px;
-    background-color: #818181;
+    width: 150px;
+    height: 55px;
+    background: none;
     border: none;
     border-radius: 7px;
     cursor: pointer;
@@ -41,33 +30,33 @@
 }
 .button:hover{
     background-color:#11140a;
+    
 }
 
 
 
-.promo h1, .tituloHome, .titulodetail{
-    font: 700 4em/1 "Oswald", sans-serif;
+.promo h1 {
+  color: white;
+    font-size: 100px;
     letter-spacing: 0;
     padding: 0.25em 0 0.325em;
     display: block;
     margin: 0 auto;
-    text-shadow: 0 5px 15px rgba(0,0,0,1);
-    font-family: ;
+    text-shadow: 0px 4px 8px  rgb(0, 0, 0),
+                 0px -8px 16px  rgb(0, 0, 0),
+                 0px -12px 24px  rgb(0, 0, 0),
+                 0px -30px 60px  rgb(0, 0, 0);
     margin-top: 10px;
-    font-size: 50px;
-    font-style: italic;
-    font-family:Georgia, 'Times New Roman';
-    /* Clip Background Image */
+   
 
-    background: url(https://www.sliderrevolution.com/wp-content/uploads/2021/05/text-anim.jpg) repeat-y;
+   
     
-    filter: grayscale(100%);
     -webkit-background-clip: text;
     background-clip: text;
 
     /* Animate Background Image */
 
-    -webkit-text-fill-color: transparent;
+    
     -webkit-animation: aitf 80s linear infinite;
     animation: aitf 80s linear infinite;
 
@@ -96,6 +85,6 @@
     left:0;
     width:100%;
     height:100%;
-    opacity:1;
+    opacity:0.7;
     object-fit: cover;
 }

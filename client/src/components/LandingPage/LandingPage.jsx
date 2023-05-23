@@ -10,7 +10,7 @@ export default function LandingPage(){
           
           <div className='promo'>
             <h1 className='title'>Welcome to</h1>
-            <h1 className='title'>The Menu</h1>
+            <h1 className='title'>The Menu.</h1>
             <Link to='/home'>
                 <button className='button'>Ingresar</button>
             </Link>

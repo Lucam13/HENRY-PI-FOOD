@@ -3,6 +3,7 @@ import { Link, useParams } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
 import { getDetail } from "../../actions";
 import { useEffect } from "react";
+import './Detail.css'
 
 export default function Detail(props) {
     const dispatch = useDispatch() 
@@ -14,36 +15,35 @@ export default function Detail(props) {
     },[dispatch])
     console.log("RECIPE - ", myRecipe)
     return (
+      <body id="background3">
         <div>
             {
-                <div> 
-                    <div>
-                        <h1 className='titulodetail'>{myRecipe?.nombre}</h1>
+            <div > 
+              <div>   
+                <Link to='/home'>
+                <button className='btn5'>Volver</button>
+                  </Link>
+               </div>
+                    <div className="detailcontainer">
+                        <h2 className='titulodetail'>{myRecipe?.name}</h2>
                     </div>
                     <div>
-                        <img src={myRecipe?.image}/>
+                        <img className="foodimage" src={myRecipe?.image}/>
                     </div>
-                    <div className="detalles">
-                        <h3>Summary: </h3>
-                        <h4 dangerouslySetInnerHTML={{ __html: myRecipe?.summary }}/>
-                        <br></br>
-                    
-                        <h3 >Steps: </h3>
+                    <div className="summary">
+                        <h3>Summary:</h3>
+                        <h4 className="details" dangerouslySetInnerHTML={{ __html: myRecipe?.summary }}/>
+                        <h3  className="details" >Steps: </h3>
                         <h4>{myRecipe?.steps?.length ? myRecipe.steps : 'Does not include instructions'}</h4>
-                        <br></br>
-                        <h3>HealthScore: </h3>
+                        <h3>HealthScore:</h3>
                         <h4>{myRecipe?.healthScore}</h4>
-                        <br></br>
-                        <h3>Diets: </h3>
+                        <h3>Diets:</h3>
                         <h4>{myRecipe?.diets}</h4>
                     </div>
                 </div>
             }
 
-            <Link to='/home'>
-                <button className='btn5'>Volver</button>
-            </Link>
         </div>
-        
+    </body>
     )
 }
